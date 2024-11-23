@@ -132,7 +132,7 @@
         }
 
         .info-container img {
-            width: 100%;
+            width: 80px;
             height: auto;
             margin-top: 20px;
             border-radius: 8px;
@@ -140,17 +140,29 @@
 
         /* Responsividad */
         @media (max-width: 768px) {
-            h1, h2 {
-                font-size: 1.5em;
+            .header-container {
+                padding: 20px;
             }
 
             button {
-                font-size: 0.9em;
-                padding: 8px 15px;
+                width: 100%;  /* Hace que los botones ocupen todo el ancho disponible en dispositivos móviles */
+                padding: 12px 0;  /* Ajusta el padding para que los botones sean más accesibles */
+                font-size: 1.1em;  /* Aumenta el tamaño del texto en botones para que sea más legible */
+                margin-bottom: 10px; /* Espaciado entre los botones */
             }
 
-            .section-container {
+            .info-container {
                 padding: 15px;
+                font-size: 0.9em; /* Ajuste de tamaño de texto en dispositivos pequeños */
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            img {
+                max-width: 100px; /* Ajusta el tamaño de las imágenes en pantallas pequeñas */
+                height: auto;
             }
         }
     </style>
@@ -202,11 +214,10 @@
         <div class="info-container">
             <h3>¿Qué es el dengue?</h3>
             <p>El dengue es una enfermedad viral transmitida por mosquitos, especialmente el mosquito Aedes aegypti. Es común en regiones tropicales y subtropicales y puede causar fiebre alta, dolor en las articulaciones, erupciones cutáneas y otros síntomas.</p>
-            <img src="img/mosquito.jpg" alt="Mosquito transmisor del dengue" style="max-width: 500px; width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
+            <img src="img/mosquito.jpg" alt="Mosquito transmisor del dengue">
             <h3>Prevención</h3>
             <p>Para prevenir el dengue, es crucial eliminar los criaderos de mosquitos y usar repelentes de insectos. Además, es recomendable usar ropa de manga larga y dormir bajo mosquiteros.</p>
-            <img src="img/prevencion.jpg" alt="Prevención del dengue" style="max-width: 70px; width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
-
+            <img src="img/prevencion.jpg" alt="Prevención del dengue">
             <h3>Síntomas</h3>
             <ul>
                 <li>Fiebre alta repentina</li>
@@ -215,10 +226,10 @@
                 <li>Náuseas y vómitos</li>
                 <li>Dolor detrás de los ojos</li>
             </ul>
-            <img src="img/sintomas.jpg" alt="Síntomas del dengue" style="max-width: 70px; width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
+            <img src="img/sintomas.jpg" alt="Síntomas del dengue">
             <h3>¿Cómo se transmite?</h3>
             <p>El dengue se transmite a través de la picadura de un mosquito infectado. Los mosquitos se infectan al picar a una persona que ya está infectada con el virus del dengue.</p>
-            <img src="img/tra.jpg" alt="Transmisión del dengue" style="max-width: 70px; width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
+            <img src="img/tra.jpg" alt="Transmisión del dengue">
         </div>
     </div>
 
@@ -245,51 +256,42 @@
         }
 
         function toggleVisibility(id) {
-            document.querySelectorAll(".container").forEach(el => el.classList.add("hidden"));
+            const sections = document.querySelectorAll(".container");
+            sections.forEach(section => {
+                section.classList.add("hidden");
+            });
             document.getElementById(id).classList.remove("hidden");
         }
 
-        // Registro de usuario
+        // Funciones de registro e inicio de sesión
         function registerUser() {
             const email = document.getElementById("register-email").value;
             const password = document.getElementById("register-password").value;
-            if (users.some(u => u.email === email)) {
-                alert("Este correo ya está registrado.");
-            } else {
-                users.push({ email, password });
-                alert("Registro exitoso.");
-                showLogin(); // Después de registrarse, redirige a la pantalla de inicio de sesión
-            }
+            users.push({ email, password });
+            alert("Usuario registrado exitosamente");
+            showWelcome();
         }
 
-        // Inicio de sesión
         function loginUser() {
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
-            const user = users.find(u => u.email === email && u.password === password);
-            if (user) {
-                currentUser = user;
-                alert("¡Bienvenido!");
-                showMainInterface(); // Muestra la interfaz principal al iniciar sesión
+            currentUser = users.find(user => user.email === email && user.password === password);
+            if (currentUser) {
+                alert("Iniciaste sesión exitosamente");
+                showMainInterface();
             } else {
-                alert("Credenciales incorrectas.");
+                alert("Credenciales incorrectas");
             }
         }
 
-        // Función para cerrar sesión
         function logout() {
             currentUser = null;
-            alert("Has cerrado sesión.");
-            showWelcome(); // Regresa a la pantalla de bienvenida
-        }
-
-        // Funciones adicionales para la interfaz principal
-        function showSurvey() {
-            alert("Aquí puedes acceder a la encuesta.");
+            alert("Has cerrado sesión");
+            showWelcome();
         }
 
         function downloadApp() {
-            alert("Aquí puedes descargar la aplicación.");
+            window.location.href = "https://example.com/descargar-aplicacion";
         }
     </script>
 </body>
