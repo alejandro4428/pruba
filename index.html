@@ -1,18 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=
-    , initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Salud es Nuestra Prioridad</title>
+    <style>
+        /* General */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f0f9f0; /* Fondo verde claro */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        p {
+            color: #333;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        /* Contenedores principales */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Contenedor para centrar la imagen y el texto */
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        /* Imagen */
+        .header-container img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Botones */
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        button.primary {
+            background-color: #4CAF50; /* Verde principal */
+            color: white;
+        }
+
+        button.secondary {
+            background-color: #A5D6A7; /* Verde suave */
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Estilo para formularios de inicio de sesión y registro */
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #A5D6A7;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+
+        input[type="email"]:focus, input[type="password"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        /* Información de dengue */
+        .info-container {
+            width: 100%;
+            padding: 20px;
+            text-align: left;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-container h3 {
+            margin-bottom: 10px;
+        }
+
+        .info-container img {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            h1, h2 {
+                font-size: 1.5em;
+            }
+
+            button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+
+            .section-container {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>PREVENCION ACTIVA </h1>
-    <p>aprenderemos el uso correcto para la prevencion del <span> dengue </span> </p>
-    <a traget="_blank" href="https://www.youtube.com/watch?v=e2EUg8-VpUU"> Prevencion Dengue </a>
-    <img scr="img/coffe.png"/>
+    <!-- Página principal -->
+    <div class="container" id="welcome-screen">
+        <div class="header-container">
+            <img src="img/prevencion.jpg" alt="Prevención Activa">
+            <h1>Prevención Activa</h1>
+            <button class="primary" onclick="showLogin()">Iniciar Sesión</button>
+            <button class="secondary" onclick="showRegister()">Registrarse</button>
+        </div>
+    </div>
 
+    <!-- Registro -->
+    <div class="container hidden" id="register-screen">
+        <h2>Registrarse</h2>
+        <form>
+            <input type="email" id="register-email" placeholder="Correo electrónico" required>
+            <input type="password" id="register-password" placeholder="Contraseña" required>
+            <button type="button" class="primary" onclick="registerUser()">Registrarse</button>
+            <button type="button" class="secondary" onclick="showWelcome()">Volver</button>
+        </form>
+    </div>
 
+    <!-- Inicio de sesión -->
+    <div class="container hidden" id="login-screen">
+        <h2>Iniciar Sesión</h2>
+        <form>
+            <input type="email" id="login-email" placeholder="Correo electrónico" required>
+            <input type="password" id="login-password" placeholder="Contraseña" required>
+            <button type="button" class="primary" onclick="loginUser()">Iniciar Sesión</button>
+            <button type="button" class="secondary" onclick="showWelcome()">Volver</button>
+        </form>
+    </div>
 
+    <!-- Página principal después de iniciar sesión -->
+    <div class="container hidden" id="main-interface">
+        <div class="header-container">
+            <img src="img/prevencion.jpg" alt="Prevención Activa" style="max-width: 200px;">
+            <h1>Bienvenido, ¡Has Iniciado Sesión!</h1>
+            <button class="primary" onclick="showSurvey()">Realizar Encuesta</button>
+            <button class="secondary" onclick="downloadApp()">Descargar Aplicación</button>
+            <button class="secondary" onclick="logout()">Cerrar Sesión</button>
+        </div>
+
+        <!-- Información sobre el dengue -->
+        <div class="info-container">
+            <h3>¿Qué es el dengue?</h3>
+            <p>El dengue es una enfermedad viral transmitida por mosquitos, especialmente el mosquito Aedes aegypti. Es común en regiones tropicales y subtropicales y puede causar fiebre alta, dolor en las articulaciones, erupciones cutáneas y otros síntomas.</p>
+            <img src="img/mosquito.jpg" alt="Mosquito transmisor del dengue" style="max-width: 80px; width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
+            <h3>Prevención</h3>
+            <p>Para prevenir el dengue, es crucial eliminar los criaderos de mosquitos y usar repelentes de insectos. Además, es recomendable usar ropa de manga larga y dormir bajo mosquiteros.</p>
+            <img src="img/prevencion.jpg" alt="Prevención del dengue" style="max-width: 100px; width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
+
+            <h3>Síntomas</h3>
+            <ul>
+                <li>Fiebre alta repentina</li>
+                <li>Dolor muscular y articular</li>
+                <li>Erupción en la piel</li>
+                <li>Náuseas y vómitos</li>
+                <li>Dolor detrás de los ojos</li>
+            </ul>
+            <img src="img/sintomas.jpg" alt="Síntomas del dengue" style="max-width: 100px; width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
+            <h3>¿Cómo se transmite?</h3>
+            <p>El dengue se transmite a través de la picadura de un mosquito infectado. Los mosquitos se infectan al picar a una persona que ya está infectada con el virus del dengue.</p>
+            <img src="img/tra.jpg" alt="Transmisión del dengue" style="max-width: 100px; width: 100%; height: auto; margin-bottom: 20px; border-radius: 8px;">
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let users = [];
+        let currentUser = null;
+
+        // Funciones de navegación
+        function showWelcome() {
+            toggleVisibility("welcome-screen");
+        }
+
+        function showRegister() {
+            toggleVisibility("register-screen");
+        }
+
+        function showLogin() {
+            toggleVisibility("login-screen");
+        }
+
+        function showMainInterface() {
+            toggleVisibility("main-interface");
+        }
+
+        function toggleVisibility(id) {
+            document.querySelectorAll(".container").forEach(el => el.classList.add("hidden"));
+            document.getElementById(id).classList.remove("hidden");
+        }
+
+        // Registro de usuario
+        function registerUser() {
+            const email = document.getElementById("register-email").value;
+            const password = document.getElementById("register-password").value;
+            if (users.some(u => u.email === email)) {
+                alert("Este correo ya está registrado.");
+            } else {
+                users.push({ email, password });
+                alert("Registro exitoso.");
+                showLogin(); // Después de registrarse, redirige a la pantalla de inicio de sesión
+            }
+        }
+
+        // Inicio de sesión
+        function loginUser() {
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+            const user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                currentUser = user;
+                alert("¡Bienvenido!");
+                showMainInterface(); // Muestra la interfaz principal al iniciar sesión
+            } else {
+                alert("Credenciales incorrectas.");
+            }
+        }
+
+        // Función para cerrar sesión
+        function logout() {
+            currentUser = null;
+            alert("Has cerrado sesión.");
+            showWelcome(); // Regresa a la pantalla de bienvenida
+        }
+
+        // Funciones adicionales para la interfaz principal
+        function showSurvey() {
+            alert("Aquí puedes acceder a la encuesta.");
+        }
+
+        function downloadApp() {
+            alert("Aquí puedes descargar la aplicación.");
+        }
+    </script>
 </body>
 </html>
